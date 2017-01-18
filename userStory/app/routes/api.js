@@ -1,11 +1,12 @@
 var User = require('../models/user');
+var Story = require('../models/story');
 var config = require('../../config');
 var secretKey = config.secretKey;
 var jwt = require('jsonwebtoken');
 
 function createToken(user) {
   var token = jwt.sign({
-    _id: user.id,
+    id: user.id,
     name: user.name,
     username: user.username
   }, secretKey, {
@@ -66,8 +67,6 @@ module.exports = function(app, express){
   });
 
   api.use(function(req, res, next){
-    console.log('We have a visitor!');
-
     var token = req.body.token || req.params['token'] || req.headers['x-access-token'];
 
     if (token) {
@@ -84,9 +83,37 @@ module.exports = function(app, express){
     }
   });
 
-  api.get('/', function(req, res) {
-      res.json("Hello Node Bozz!")
-  })
+  // api.get('/', function(req, res) {
+  //     res.json("Hello Node Bozz!")
+  // })
+
+  api.get('/stories', function(req, res){
+    Story.find({}, function(err, stories){
+      if (err) {
+        res.send(err);
+        return;
+      }
+      res.json(stories);
+    });
+  });
+
+  api.route('/')
+    .post(function(req, res){
+      var story = new Story({
+        creator: req.decoded.id,
+        content: req.body.content,
+      });
+
+      story.save(function(err) {
+        if(err) {
+          res.send(err);
+          return;
+        }
+        res.json({message: "New Story Created"});
+      })
+
+    })
+
 
   return api;
 
