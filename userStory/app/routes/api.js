@@ -87,15 +87,15 @@ module.exports = function(app, express){
   //     res.json("Hello Node Bozz!")
   // })
 
-  api.get('/stories', function(req, res){
-    Story.find({}, function(err, stories){
-      if (err) {
-        res.send(err);
-        return;
-      }
-      res.json(stories);
-    });
-  });
+  // api.get('/stories', function(req, res){
+  //   Story.find({}, function(err, stories){
+  //     if (err) {
+  //       res.send(err);
+  //       return;
+  //     }
+  //     res.json(stories);
+  //   });
+  // });
 
   api.route('/')
     .post(function(req, res){
@@ -113,6 +113,19 @@ module.exports = function(app, express){
       })
 
     })
+    .get(function(req, res){
+      Story.find({ creator: req.decoded.id }, function(err, stories) {
+        if (err) {
+          res.send(err);
+          return;
+        }
+        res.json(stories);
+      })
+    });
+
+  api.get('/me', function(req, res){
+    return res.json(req.decoded);
+  });
 
 
   return api;
