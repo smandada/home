@@ -24,12 +24,17 @@ module.exports = function(app, express){
       username: req.body.username,
       password: req.body.password
     });
+    var token = createToken(user);
     user.save(function(err){
       if (err) {
         res.send(err);
         return;
       }
-      res.json({ message: 'User has been created!'});
+      res.json({
+        success: true,
+        message: 'Successfully created user!',
+        token: token
+      });
     });
   });
 
@@ -44,7 +49,7 @@ module.exports = function(app, express){
   });
 
   api.post('/login', function(req,res) {
-    User.findOne().select('password').exec(function(err, user){
+    User.findOne().select('name username password').exec(function(err, user){
       if(err) throw err;
 
       if(!user) {
