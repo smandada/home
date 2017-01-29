@@ -1,6 +1,6 @@
 // angular.module('appRoutes', ['ngRoute'])
 // .config(function($routeProvider, $locationProvider) {
-// 	$routePovider.when('/', {
+// 	$routeProvider.when('/', {
 // 		templateUrl: 'app/views/pages/home.html'
 // 	});
 // })

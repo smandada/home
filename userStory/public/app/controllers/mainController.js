@@ -4,6 +4,7 @@ angular.module('mainCtrl', [])
 	var vm = this;
 
 	vm.loggedIn = Auth.isLoggedIn();
+  vm.userName = '';
 
 	//on every route change check if the user is logged in
   $rootScope.$on('$routeChangeStart', function() {
@@ -24,17 +25,18 @@ angular.module('mainCtrl', [])
       //setup the user object
       Auth.getUser().then(function(user){
         vm.user = user.data;
+        vm.userName = vm.user.name;
       });
 
-      if (data.data.success)
+     if (data.data.success)
         $state.go('home');
       else
-        vm.error = data.message;    
+        vm.error = data.message;
     });
   };
 
   vm.doLogout = function() {
     Auth.logout();
-    $state.go('home');
+    $state.go('login');
   };
 })
