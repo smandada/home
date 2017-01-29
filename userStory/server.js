@@ -17,12 +17,14 @@ app.use(bodyParser.urlencoded({encoded: true}));
 app.use(bodyParser.json());
 app.use(morgan('dev'));
 
+app.use(express.static(__dirname + '/public')); //render the frontend files from the public folder
+
 var api = require('./app/routes/api')(app, express);
 //middleware, passing api , /api is prefix for everything in the file api.js
 app.use('/api', api);
 
 app.get('*', function(req, res){
-  res.sendFile(__dirname + '/public/views/index.html')
+  res.sendFile(__dirname + '/public/app/views/index.html')
 });
 
 app.listen(config.port, function(err) {
