@@ -1,7 +1,7 @@
 {
-  "name": "user_story",
+  "name": "user_idea",
   "version": "1.0.0",
-  "description": "this is a user story app",
+  "description": "this is a user idea app",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

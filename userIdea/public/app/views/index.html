@@ -2,7 +2,7 @@
 <html ng-app="myApp">
 	<head>
 		<base href="/">
-		<title>User Idea</title>
+		<title>Idea Factory</title>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js"></script>
 <!-- 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.4.2/angular-ui-router.js"></script> -->
@@ -11,8 +11,10 @@
 		<!-- services -->
 		<script type="text/javascript" src="app/services/authService.js"></script>
 		<script type="text/javascript" src="app/services/userService.js"></script>
+		<script type="text/javascript" src="app/services/ideaService.js"></script>
 
 		<!-- controllers -->
+		<script type="text/javascript" src="app/controllers/ideaController.js"></script>
 		<script type="text/javascript" src="app/controllers/userController.js"></script>
 		<script type="text/javascript" src="app/controllers/mainController.js"></script>
 		<script type="text/javascript" src="app/app.routes.js"></script>
@@ -25,7 +27,7 @@
 					<div class="navbar-header">
 						<a href="/" class="navbar-brand">
 						<span class="glyphicon glyphicon-book"></span>
-						User Idea
+						 Idea Factory
 						</a>
 					</div>
 
@@ -36,15 +38,14 @@
 					<ul class="nav navbar-nav navbar-right">
 						<li ng-if="!main.loggedIn"><a href="/login">Login</a></li>
 						<li ng-if="!main.loggedIn"><a href="/signup">Signup</a></li>
-						<li ng-if="main.loggedIn"><a href="#">Hello {{main.userName}}</a></li>
-						<li ng-if="main.loggedIn"><a href="#" ng-click="main.doLogout()">Logout</a></li>
+						<li ng-if="main.loggedIn"><a href="#">Hello {{main.user.name}}</a></li>
+						<li ng-if="main.loggedIn"><a href="#" ng-click="main.doLogout()">| Logout</a></li>
 					</ul>
 				</div>
 			</div>
 		</header>
 
 		<main class="container">
-      Index Page
 			<div ng-view></div>
 		</main>
 	</body>

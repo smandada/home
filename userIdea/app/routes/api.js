@@ -1,5 +1,5 @@
 var User = require('../models/user');
-var Story = require('../models/story');
+var Idea = require('../models/idea');
 var config = require('../../config');
 var secretKey = config.secretKey;
 var jwt = require('jsonwebtoken');
@@ -92,39 +92,42 @@ module.exports = function(app, express){
   //     res.json("Hello Node Bozz!")
   // })
 
-  // api.get('/stories', function(req, res){
-  //   Story.find({}, function(err, stories){
+  // api.get('/ideas', function(req, res){
+  //   Idea.find({}, function(err, ideas){
   //     if (err) {
   //       res.send(err);
   //       return;
   //     }
-  //     res.json(stories);
+  //     res.json(ideas);
   //   });
   // });
 
   api.route('/')
     .post(function(req, res){
-      var story = new Story({
+      var idea = new Idea({
         creator: req.decoded.id,
         content: req.body.content,
       });
 
-      story.save(function(err) {
+      idea.save(function(err) {
         if(err) {
           res.send(err);
           return;
         }
-        res.json({message: "New Story Created"});
-      })
+        res.json({
+          message: "New Idea Created",
+          idea: idea
+        });
+      });
 
     })
     .get(function(req, res){
-      Story.find({ creator: req.decoded.id }, function(err, stories) {
+      Idea.find({ creator: req.decoded.id }, function(err, ideas) {
         if (err) {
           res.send(err);
           return;
         }
-        res.json(stories);
+        res.json(ideas);
       })
     });
 
