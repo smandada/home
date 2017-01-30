@@ -1,6 +1,6 @@
 angular.module('ideaCtrl', ['ideaService'])
 
-.controller('IdeaController', function(Idea) {
+.controller('IdeaController', function(Idea, socketIO) {
   var vm = this;
 
   vm.ideas = [];
@@ -19,7 +19,10 @@ angular.module('ideaCtrl', ['ideaService'])
         content: ''
       };
       vm.message = resp.data.message;
-      vm.ideas.push(resp.data.idea);
     }); 
   };
+
+  socketIO.on('idea', function(data) {
+    vm.ideas.push(data);
+  })
 });

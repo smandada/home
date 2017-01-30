@@ -26,10 +26,17 @@
           </form>
         </div>
       </div>  
+
       <div class="panel panel-success">
-        <p class="panel-body" ng-repeat="idea in ideaCtrl.ideas track by $index">
-          {{ idea.content }}
-        </p>
+        <div class="panel-heading">
+          Your Ideas <span style="float:right" >({{ ideaCtrl.ideas.length|| 0 }})</span><!--Move style to CSS-->
+        </div>
+        <div class="panel-body">
+          <p  ng-repeat="idea in ideaCtrl.ideas track by $index">
+            {{ idea.content }}
+          </p>
+        </div>
+
       </div>
     </div>
 

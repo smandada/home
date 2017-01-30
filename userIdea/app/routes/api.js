@@ -15,9 +15,9 @@ function createToken(user) {
   return token;
 }
 
-module.exports = function(app, express){
+module.exports = function(app, express, io){
   var api = express.Router();
-  
+
   api.post('/signup', function(req, res){
     var user = new User({
       name: req.body.name,
@@ -109,14 +109,14 @@ module.exports = function(app, express){
         content: req.body.content,
       });
 
-      idea.save(function(err) {
+      idea.save(function(err, newIdea) {
         if(err) {
           res.send(err);
           return;
         }
+        io.emit('idea', newIdea);
         res.json({
-          message: "New Idea Created",
-          idea: idea
+          message: "New Idea Created"
         });
       });
 
