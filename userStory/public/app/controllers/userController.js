@@ -9,7 +9,7 @@ angular.module('userCtrl', ['userService'])
 
 })
 
-.controller('UserCreateController', function(User, $state, $window){
+.controller('UserCreateController', function(User, $location, $window){
 	var vm = this;
 
   vm.signup = function() {
@@ -19,7 +19,7 @@ angular.module('userCtrl', ['userService'])
       vm.userData = {};
       vm.message = resp.data.message;
       $window.localStorage.setItem('token', resp.data.token);
-      $state.go('home');
+      $location.path('/');
     });
   };
 
