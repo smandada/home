@@ -1,0 +1,19 @@
+<div class="row">
+  <div class="col-md-3"></div>
+  <div class="col-md-4">
+    <div class="row">
+      <div class="panel panel-success">
+        <div class="panel-heading">
+          <span>All Ideas</span> <span>({{ ideasCtrl.ideas.length|| 0 }})</span>
+          <span class="pull-right"><a href="/">My Ideas</a></span>
+        </div>
+        <div class="panel-body">
+          <p  ng-repeat="idea in ideasCtrl.ideas track by $index">
+            {{ idea.content }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3"></div>
+</div>

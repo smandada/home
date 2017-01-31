@@ -29,7 +29,8 @@
 
       <div class="panel panel-success">
         <div class="panel-heading">
-          Your Ideas <span style="float:right" >({{ ideaCtrl.ideas.length|| 0 }})</span><!--Move style to CSS-->
+          <span>Your Ideas</span> <span>({{ ideaCtrl.ideas.length|| 0 }})</span>
+          <span class="pull-right"><a href="/allIdeas">All Ideas</a></span>
         </div>
         <div class="panel-body">
           <p  ng-repeat="idea in ideaCtrl.ideas track by $index">

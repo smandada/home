@@ -1,4 +1,5 @@
 angular.module('ideaService', [])
+
 .factory('Idea', function($http){
 	var ideaFactory = {};
 
@@ -6,11 +7,17 @@ angular.module('ideaService', [])
 		return $http.post('/api', ideaData);
 	};
 
-	ideaFactory.allIdeas=function(){
+	ideaFactory.all=function(){
     return $http.get('/api');
 	};
+  
+  ideaFactory.allIdeas=function(){
+    return $http.get('/api/all_ideas');
+  };
+
   return ideaFactory;
 })
+
 .factory('socketIO', function($rootScope){
 	var socket = io.connect();
 

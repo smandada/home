@@ -11,6 +11,16 @@ angular.module('appRoutes', ['ngRoute'])
   $routeProvider.when('/signup', {
     templateUrl: 'app/views/pages/signup.html'
   });
+  $routeProvider.when('/allIdeas', {
+    templateUrl: 'app/views/pages/allIdeas.html',
+    controller: 'AllIdeasController',
+    controllerAs: 'ideasCtrl',
+    resolve: {
+      ideas: function(Idea){
+        return Idea.allIdeas();
+      }
+    }
+  });
   
   $locationProvider.html5Mode(true);
 })

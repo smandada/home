@@ -71,6 +71,16 @@ module.exports = function(app, express, io){
     })
   });
 
+  api.get('/all_ideas', function(req, res){
+    Idea.find({}, function(err, ideas){
+      if (err){
+        res.send(err);
+        return;
+      }
+      res.json(ideas);
+    })
+  })
+
   api.use(function(req, res, next){
     var token = req.body.token || req.params['token'] || req.headers['x-access-token'];
 
@@ -82,25 +92,11 @@ module.exports = function(app, express, io){
           req.decoded = decoded;
           next();
         }
-      })
+      });
     } else {
-      return res.status(403).send({ success: false, message: 'Missing token, try login again.'})
+      return res.status(403).send({ success: false, message: 'Missing token, try login again.'});
     }
   });
-
-  // api.get('/', function(req, res) {
-  //     res.json("Hello Node Bozz!")
-  // })
-
-  // api.get('/ideas', function(req, res){
-  //   Idea.find({}, function(err, ideas){
-  //     if (err) {
-  //       res.send(err);
-  //       return;
-  //     }
-  //     res.json(ideas);
-  //   });
-  // });
 
   api.route('/')
     .post(function(req, res){

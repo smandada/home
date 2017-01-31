@@ -9,7 +9,7 @@ angular.module('ideaCtrl', ['ideaService'])
   };
   vm.message = '';
 
-  Idea.allIdeas().then(function(resp) {
+  Idea.all().then(function(resp) {
     vm.ideas = resp.data;
   });
 
@@ -24,5 +24,16 @@ angular.module('ideaCtrl', ['ideaService'])
 
   socketIO.on('idea', function(data) {
     vm.ideas.push(data);
-  })
+  });
+})
+.controller('AllIdeasController', function(ideas, socketIO){
+
+  var vm = this;
+
+  vm.ideas = ideas.data;
+
+  socketIO.on('idea', function(data){
+    vm.ideas.push(data);
+  });
+
 });
